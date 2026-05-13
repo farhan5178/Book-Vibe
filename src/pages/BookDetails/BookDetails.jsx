@@ -1,5 +1,5 @@
 
-import React, { use } from 'react'
+import React, { use, useState } from 'react'
 import { useLoaderData, useParams } from 'react-router'
 
 // const booksPromise=fetch('/booksData.json').then(res=>res.json())
@@ -21,16 +21,34 @@ export default function BookDetails() {
     review,
     image,
     bookId}=expectedBook;
-    console.log(expectedBook ,"expected book")
+   
+    const [storedBooks,setStoredBooks]=useState([]);
+     const handleMarkAsRead=(currentBook)=>{
+        console.log(currentBook)
+        // step 1 store book id or store book object 
+
+        // step 2 where to store 
+        // step 3 array pf cullection 
+        // step 4 if the book is alrealy exeist show  alert 
+        const isExistBook=storedBooks.find(book=>book.bookId===currentBook.bookId);
+        if(isExistBook){
+            alert ("The Book Is already Exeists ")
+        }else{
+            setStoredBooks([...storedBooks,currentBook])
+        }
+        // step 5  if not then add the book in the array of collection 
+
+     }
+
     return (
     
-            <div className="grid grid-cols-2 bg-base-100 shadow-sm container mx-auto">
-  <figure>
+            <div className="grid grid-cols-2 bg-base-100 shadow-sm container mx-auto my-9">
+  <figure className='w-full flex items-center justify-center bg-blue-50 rounded-2xl'>
     <img
-    className='h-[400px] flex-1'
+    className='h-[400px] '
       src={image} />
   </figure>
-  <div className="card-body space-y-3 flex-1">
+  <div className="card-body space-y-3">
     <h2 className="card-title text-2xl">{bookName}</h2>
     <p>By:{author}</p>
     <p className='py-2 border-y'>Catagory :{category}</p>
@@ -60,9 +78,9 @@ export default function BookDetails() {
         </div>
     <div className='flex items-center gap-2'>
             
-      <button className="btn ">Read</button>
+      <button className="btn " onClick={() => handleMarkAsRead(expectedBook)}>Mark as Read</button>
         
-      <button className="btn btn-primary">Wishlist</button>
+      <button onClick={()=>handleMarkAsRead(expectedBook)} className="btn btn-primary">Mark as Wishlist</button>
     </div>
     </div>
   </div>
