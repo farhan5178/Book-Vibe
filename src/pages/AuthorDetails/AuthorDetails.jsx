@@ -106,7 +106,9 @@ const AuthorDetails = () => {
 
                         <div className="flex flex-wrap gap-12 pt-8 border-t border-base-content/10">
                             <div>
-                                <p className="text-4xl font-black text-green-500">{authorBooks.length}</p>
+                                <p className="text-4xl font-black text-green-500">
+                                    {authorBooks.length.toString().padStart(2, '0')}
+                                </p>
                                 <p className="text-xs font-bold opacity-50 uppercase tracking-widest">Books in Library</p>
                             </div>
                             <div>
