@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { Sun, Moon } from 'lucide-react';
+import { BookContext } from '../../../context/BookProvider';
 
 export default function NavBar() {
+    const { storedBooks, wishlist } = useContext(BookContext);
+    const totalListedBooks = storedBooks.length + wishlist.length;
     const [theme, setTheme] = useState(
         localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light'
     );
@@ -40,7 +43,7 @@ export default function NavBar() {
             <li>
                 <NavLink
                     className={({ isActive }) =>
-                        `font-semibold mr-2 px-3 py-1 rounded-lg transition-colors ${isActive
+                        `font-semibold mr-2 px-3 py-1 rounded-lg transition-colors flex items-center gap-2 ${isActive
                             ? "text-green-500 border border-green-500"
                             : "hover:text-green-500"
                         }`
@@ -48,6 +51,11 @@ export default function NavBar() {
                     to="/books"
                 >
                     Listed Books
+                    {totalListedBooks > 0 && (
+                        <span className="w-5 h-5 flex items-center justify-center bg-green-500 text-white text-[10px] font-black rounded-full shadow-lg shadow-green-500/30 -translate-y-1">
+                            {totalListedBooks}
+                        </span>
+                    )}
                 </NavLink>
             </li>
 

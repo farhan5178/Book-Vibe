@@ -50,8 +50,27 @@ export default function BookProvider({ children }) {
         }
     }
 
+    const removeFromReadList = (bookId, bookName) => {
+        const filtered = storedBooks.filter(book => book.bookId !== bookId);
+        setStoredBooks(filtered);
+        toast.info(`${bookName} removed from read list`);
+    }
+
+    const removeFromWishlist = (bookId, bookName) => {
+        const filtered = wishlist.filter(book => book.bookId !== bookId);
+        setWishlist(filtered);
+        toast.info(`${bookName} removed from wishlist`);
+    }
+
     const data = {
-        storedBooks, setStoredBooks, handleMarkAsRead, wishlist, setWishlist, handleWishList
+        storedBooks, 
+        setStoredBooks, 
+        handleMarkAsRead, 
+        wishlist, 
+        setWishlist, 
+        handleWishList,
+        removeFromReadList,
+        removeFromWishlist
     }
 
     return <BookContext.Provider value={data}>

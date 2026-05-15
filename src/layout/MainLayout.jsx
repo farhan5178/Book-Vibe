@@ -51,6 +51,11 @@ export default function MainLayout() {
     const location = useLocation();
     const isLoading = navigation.state === 'loading';
 
+    // Scroll to top on route change
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location.pathname]);
+
     return (
         <div className="min-h-screen flex flex-col transition-colors duration-300">
             <NavBar />
